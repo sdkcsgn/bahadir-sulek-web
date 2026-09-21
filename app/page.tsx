@@ -327,7 +327,7 @@ Teşekkürler.`
                 <img
                   src={heroImage}
                   alt="Bahadır Sülek meyve ve tesis görseli"
-                  className="w-[110%] max-w-[560px] object-contain drop-shadow-2xl"
+                  className="w-[90%] max-w-[500px] object-contain drop-shadow-2xl"
                 />
               </div>
 
