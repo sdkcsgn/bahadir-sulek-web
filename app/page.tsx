@@ -209,12 +209,12 @@ export default async function Home({ searchParams }: HomeProps) {
   const currentYear = new Date().getFullYear();
 
   return (
-    <main id="anasayfa" className="min-h-screen bg-[#f7f7f3] text-[#0b3b2b]">
+    <main id="anasayfa" className="min-h-screen overflow-x-hidden bg-[#f7f7f3] text-[#0b3b2b]">
       <div className="bg-[#07572e] text-white">
-        <div className="mx-auto flex max-w-[1450px] items-center justify-between gap-4 px-5 py-2 text-[12px] font-bold lg:px-8">
+        <div className="mx-auto flex max-w-[1450px] items-center justify-between gap-2 px-3 py-2 text-[11px] font-bold sm:gap-4 sm:px-5 sm:text-[12px] lg:px-8">
           <div className="hidden truncate md:block">📍 {address}</div>
 
-          <div className="ml-auto flex items-center gap-3 whitespace-nowrap md:gap-5">
+          <div className="ml-auto flex min-w-0 items-center gap-2 whitespace-nowrap sm:gap-3 md:gap-5">
             {phone && (
               <a href={phoneHref(phone)} className="transition hover:text-orange-300">
                 📞 {phone}
@@ -284,12 +284,12 @@ export default async function Home({ searchParams }: HomeProps) {
       </div>
 
       <header className="sticky top-0 z-50 border-b border-black/5 bg-white/95 shadow-sm backdrop-blur">
-        <div className="mx-auto flex max-w-[1450px] items-center justify-between gap-6 px-5 py-4 lg:px-8">
+        <div className="mx-auto flex max-w-[1450px] items-center justify-between gap-2 px-3 py-3 sm:gap-6 sm:px-5 sm:py-4 lg:px-8">
           <a href={`/?lang=${lang}`} className="shrink-0">
             <img
               src="/images/bs_logo.png"
               alt="Bahadır Sülek"
-              className="h-[72px] w-auto object-contain md:h-[88px]"
+              className="h-[56px] w-auto max-w-[58vw] object-contain sm:h-[72px] sm:max-w-none md:h-[88px]"
             />
           </a>
 
@@ -322,14 +322,14 @@ export default async function Home({ searchParams }: HomeProps) {
 
           <a
             href={mailLink}
-            className="rounded-full bg-red-600 px-6 py-4 text-sm font-black text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-red-700"
+            className="shrink-0 rounded-2xl bg-red-600 px-3 py-3 text-center text-[11px] font-black leading-tight text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-red-700 sm:rounded-full sm:px-6 sm:py-4 sm:text-sm"
           >
             📄 {t.nav.quote}
           </a>
         </div>
 
-        <div className="border-t border-black/5 bg-white px-4 py-3 lg:hidden">
-          <div className="mx-auto flex max-w-[1450px] gap-5 overflow-x-auto whitespace-nowrap text-sm font-bold">
+        <div className="border-t border-black/5 bg-white px-3 py-3 lg:hidden">
+          <div className="mx-auto grid max-w-[600px] grid-cols-3 gap-x-2 gap-y-3 text-center text-[12px] font-bold sm:text-sm">
             <a href="#kurumsal">{t.nav.corporate}</a>
             <a href="#tesis">{t.nav.facility}</a>
             <a href="#urunler">{t.nav.products}</a>
@@ -341,93 +341,93 @@ export default async function Home({ searchParams }: HomeProps) {
       </header>
 
       <section className="bg-gradient-to-br from-[#07572e] via-[#086032] to-[#064925] text-white">
-        <div className="mx-auto grid max-w-[1300px] gap-12 px-6 pb-24 pt-12 lg:grid-cols-2 lg:items-center lg:pb-28">
+        <div className="mx-auto grid max-w-[1300px] gap-8 px-4 pb-16 pt-8 sm:px-6 sm:pb-24 sm:pt-12 lg:grid-cols-2 lg:items-center lg:gap-12 lg:pb-28">
           <div>
             <div className="inline-flex items-center rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-black">
               🍊 {lang === "tr" ? `${antalyaHal} Antalya Hal` : t.hero.badge}
             </div>
 
-            <h1 className="mt-7 text-[48px] font-black uppercase leading-[0.95] tracking-tight text-red-500 drop-shadow-[0_2px_3px_rgba(255,255,255,0.5)] md:text-[70px]">
+            <h1 className="mt-6 text-[40px] font-black uppercase leading-[0.95] tracking-tight text-red-500 drop-shadow-[0_2px_3px_rgba(255,255,255,0.5)] sm:text-[48px] md:text-[70px]">
               {companyName}
             </h1>
 
-            <div className="mt-4 text-xl font-black uppercase tracking-wide md:text-2xl">
+            <div className="mt-4 text-lg font-black uppercase leading-snug tracking-wide sm:text-xl md:text-2xl">
               {subtitle}
             </div>
 
-            <div className="mt-10 border-l-4 border-orange-400 pl-6">
-              <div className="text-5xl font-black leading-none md:text-6xl">
+            <div className="mt-8 border-l-4 border-orange-400 pl-4 sm:mt-10 sm:pl-6">
+              <div className="text-[38px] font-black leading-[1.02] sm:text-5xl md:text-6xl">
                 {t.hero.line1}
               </div>
-              <div className="mt-1 text-5xl font-black leading-none text-orange-400 md:text-6xl">
+              <div className="mt-1 text-[38px] font-black leading-[1.02] text-orange-400 sm:text-5xl md:text-6xl">
                 {t.hero.line2}
               </div>
             </div>
 
-            <p className="mt-7 max-w-2xl text-lg font-medium leading-8 text-white/90">
+            <p className="mt-6 max-w-2xl text-base font-medium leading-7 text-white/90 sm:mt-7 sm:text-lg sm:leading-8">
               {description}
             </p>
 
-            <div className="mt-8 flex flex-wrap gap-4">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
               <a
                 href="#tesis"
-                className="rounded-full bg-orange-500 px-7 py-4 font-black text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-orange-600"
+                className="w-full rounded-full bg-orange-500 px-6 py-4 text-center font-black text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-orange-600 sm:w-auto sm:px-7"
               >
                 ❄ {t.hero.discover} →
               </a>
 
               <a
                 href="#iletisim"
-                className="rounded-full border border-white/30 bg-white/10 px-7 py-4 font-black text-white transition hover:bg-white/20"
+                className="w-full rounded-full border border-white/30 bg-white/10 px-6 py-4 text-center font-black text-white transition hover:bg-white/20 sm:w-auto sm:px-7"
               >
                 ☎ {t.hero.contact}
               </a>
             </div>
           </div>
 
-          <div className="relative mx-auto h-[430px] w-full max-w-[540px] overflow-hidden rounded-[56px] border-4 border-orange-400 bg-gradient-to-r from-orange-400 to-orange-600 shadow-2xl">
-            <div className="absolute left-[45px] top-[115px] flex h-[300px] w-[48%] items-center justify-center">
+          <div className="relative mx-auto h-[380px] w-full max-w-[540px] overflow-hidden rounded-[36px] border-4 border-orange-400 bg-gradient-to-r from-orange-400 to-orange-600 shadow-2xl sm:h-[430px] sm:rounded-[56px]">
+            <div className="absolute left-[18px] top-[95px] flex h-[270px] w-[46%] items-center justify-center sm:left-[45px] sm:top-[115px] sm:h-[300px] sm:w-[48%]">
               <img
                 src={heroImage}
                 alt="Bahadır Sülek"
-                className="max-h-[350px] w-auto max-w-full object-contain drop-shadow-2xl"
+                className="max-h-[285px] w-auto max-w-full object-contain drop-shadow-2xl sm:max-h-[350px]"
               />
             </div>
 
-            <div className="absolute inset-y-0 right-0 w-[48%] bg-gradient-to-r from-orange-500/70 to-orange-600 px-7 py-9">
-              <div className="text-2xl font-black leading-tight">
+            <div className="absolute inset-y-0 right-0 w-[51%] bg-gradient-to-r from-orange-500/70 to-orange-600 px-4 py-6 sm:w-[48%] sm:px-7 sm:py-9">
+              <div className="text-lg font-black leading-tight sm:text-2xl">
                 {t.hero.freshness}
               </div>
 
               <div className="my-5 h-px w-10 bg-white/80" />
 
-              <div className="space-y-5 font-black">
+              <div className="space-y-3 text-sm font-black sm:space-y-5 sm:text-base">
                 <div>❄️ &nbsp; {t.hero.coldStorage}</div>
                 <div>⚙️ &nbsp; {t.hero.processing}</div>
                 <div>📦 &nbsp; {t.hero.packaging}</div>
                 <div>🚚 &nbsp; {t.hero.shipping}</div>
               </div>
 
-              <div className="mt-8 text-xl italic leading-tight text-white">
+              <div className="mt-6 text-base italic leading-tight text-white sm:mt-8 sm:text-xl">
                 {t.hero.naturalTaste}
               </div>
             </div>
           </div>
         </div>
 
-        <div className="relative z-10 mx-auto -mb-[66px] grid max-w-[1000px] overflow-hidden rounded-[28px] bg-white text-[#07572e] shadow-2xl md:grid-cols-3">
-          <div className="flex min-h-[135px] items-center justify-center gap-6 border-b p-7 md:border-b-0 md:border-r">
+        <div className="relative z-10 mx-4 -mb-[40px] grid max-w-[1000px] overflow-hidden rounded-[24px] bg-white text-[#07572e] shadow-2xl sm:mx-auto sm:-mb-[66px] sm:rounded-[28px] md:grid-cols-3">
+          <div className="flex min-h-[110px] items-center justify-center gap-4 border-b p-5 sm:min-h-[135px] sm:gap-6 sm:p-7 md:border-b-0 md:border-r">
             <div className="text-3xl">❄</div>
             <div className="text-center">
-              <div className="text-5xl font-black text-red-600">{coldRooms}</div>
+              <div className="text-4xl font-black text-red-600 sm:text-5xl">{coldRooms}</div>
               <div className="mt-1 font-black">{t.stats.coldRooms}</div>
             </div>
           </div>
 
-          <div className="flex min-h-[135px] items-center justify-center gap-6 border-b p-7 md:border-b-0 md:border-r">
+          <div className="flex min-h-[110px] items-center justify-center gap-4 border-b p-5 sm:min-h-[135px] sm:gap-6 sm:p-7 md:border-b-0 md:border-r">
             <div className="text-3xl">▤</div>
             <div className="text-center">
-              <div className="text-5xl font-black text-red-600">
+              <div className="text-4xl font-black text-red-600 sm:text-5xl">
                 {storageCapacity}
               </div>
               <div className="mt-1 max-w-[220px] font-black">
@@ -436,10 +436,10 @@ export default async function Home({ searchParams }: HomeProps) {
             </div>
           </div>
 
-          <div className="flex min-h-[135px] items-center justify-center gap-6 p-7">
+          <div className="flex min-h-[110px] items-center justify-center gap-4 p-5 sm:min-h-[135px] sm:gap-6 sm:p-7">
             <div className="text-3xl">⌖</div>
             <div className="text-center">
-              <div className="text-5xl font-black text-red-600">{antalyaHal}</div>
+              <div className="text-4xl font-black text-red-600 sm:text-5xl">{antalyaHal}</div>
               <div className="mt-1 font-black">{t.stats.antalyaMarket}</div>
             </div>
           </div>
@@ -452,7 +452,7 @@ export default async function Home({ searchParams }: HomeProps) {
             <div className="font-black uppercase tracking-[0.35em] text-orange-500">
               {t.corporate.eyebrow}
             </div>
-            <h2 className="mx-auto mt-4 max-w-4xl text-4xl font-black leading-tight text-[#063f2d] md:text-5xl">
+            <h2 className="mx-auto mt-4 max-w-4xl text-3xl font-black leading-tight text-[#063f2d] sm:text-4xl md:text-5xl">
               {t.corporate.title}
             </h2>
             <p className="mx-auto mt-5 max-w-3xl text-lg leading-8 text-gray-600">
@@ -484,13 +484,13 @@ export default async function Home({ searchParams }: HomeProps) {
         </div>
       </section>
 
-      <section id="urunler" className="bg-[#f2f3ee] px-6 py-24">
+      <section id="urunler" className="bg-[#f2f3ee] px-4 py-16 sm:px-6 sm:py-24">
         <div className="mx-auto max-w-[1300px]">
           <div className="text-center">
             <div className="font-black uppercase tracking-[0.35em] text-orange-500">
               {t.products.eyebrow}
             </div>
-            <h2 className="mt-4 text-4xl font-black text-[#063f2d] md:text-5xl">
+            <h2 className="mt-4 text-3xl font-black text-[#063f2d] sm:text-4xl md:text-5xl">
               {t.products.title}
             </h2>
           </div>
@@ -535,13 +535,13 @@ export default async function Home({ searchParams }: HomeProps) {
         </div>
       </section>
 
-      <section id="tesis" className="bg-white px-6 py-24">
+      <section id="tesis" className="bg-white px-4 py-16 sm:px-6 sm:py-24">
         <div className="mx-auto grid max-w-[1300px] gap-12 lg:grid-cols-2 lg:items-center">
           <div>
             <div className="font-black uppercase tracking-[0.35em] text-orange-500">
               {t.facility.eyebrow}
             </div>
-            <h2 className="mt-4 text-4xl font-black leading-tight text-[#063f2d] md:text-5xl">
+            <h2 className="mt-4 text-3xl font-black leading-tight text-[#063f2d] sm:text-4xl md:text-5xl">
               {t.facility.title}
             </h2>
             <p className="mt-6 text-lg leading-8 text-gray-600">
@@ -569,20 +569,20 @@ export default async function Home({ searchParams }: HomeProps) {
             <img
               src="/images/tesis_dis.jpeg"
               alt={t.facility.title}
-              className="h-[480px] w-full object-cover"
+              className="h-[280px] w-full object-cover sm:h-[380px] lg:h-[480px]"
             />
           </div>
         </div>
       </section>
 
-      <section id="paketleme" className="bg-[#07572e] px-6 py-24 text-white">
+      <section id="paketleme" className="bg-[#07572e] px-4 py-16 text-white sm:px-6 sm:py-24">
         <div className="mx-auto max-w-[1300px]">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
             <div className="overflow-hidden rounded-[36px] shadow-2xl">
               <img
                 src="/images/paketleme_makinasi.jpeg"
                 alt={t.packaging.title}
-                className="h-[480px] w-full object-cover"
+                className="h-[280px] w-full object-cover sm:h-[380px] lg:h-[480px]"
               />
             </div>
 
@@ -590,7 +590,7 @@ export default async function Home({ searchParams }: HomeProps) {
               <div className="font-black uppercase tracking-[0.35em] text-orange-400">
                 {t.packaging.eyebrow}
               </div>
-              <h2 className="mt-4 text-4xl font-black leading-tight md:text-5xl">
+              <h2 className="mt-4 text-3xl font-black leading-tight sm:text-4xl md:text-5xl">
                 {t.packaging.title}
               </h2>
               <p className="mt-6 text-lg leading-8 text-white/75">
@@ -622,13 +622,13 @@ export default async function Home({ searchParams }: HomeProps) {
         </div>
       </section>
 
-      <section id="galeri" className="bg-[#f2f3ee] px-6 py-24">
+      <section id="galeri" className="bg-[#f2f3ee] px-4 py-16 sm:px-6 sm:py-24">
         <div className="mx-auto max-w-[1300px]">
           <div className="text-center">
             <div className="font-black uppercase tracking-[0.35em] text-orange-500">
               {t.gallery.eyebrow}
             </div>
-            <h2 className="mt-4 text-4xl font-black text-[#063f2d] md:text-5xl">
+            <h2 className="mt-4 text-3xl font-black text-[#063f2d] sm:text-4xl md:text-5xl">
               {t.gallery.title}
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-600">
@@ -647,7 +647,7 @@ export default async function Home({ searchParams }: HomeProps) {
                     <img
                       src={image.imagePath}
                       alt={image.title || t.gallery.defaultTitle}
-                      className="h-[330px] w-full object-cover transition duration-500 group-hover:scale-105"
+                      className="h-[260px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[330px]"
                     />
                   </div>
 
@@ -670,14 +670,14 @@ export default async function Home({ searchParams }: HomeProps) {
         </div>
       </section>
 
-      <section id="iletisim" className="bg-[#092d1c] px-6 py-24 text-white">
+      <section id="iletisim" className="bg-[#092d1c] px-4 py-16 text-white sm:px-6 sm:py-24">
         <div className="mx-auto max-w-[1300px]">
           <div className="grid gap-12 lg:grid-cols-2">
             <div>
               <div className="font-black uppercase tracking-[0.25em] text-orange-400">
                 {t.contact.eyebrow}
               </div>
-              <h2 className="mt-4 text-4xl font-black leading-tight md:text-5xl">
+              <h2 className="mt-4 text-3xl font-black leading-tight sm:text-4xl md:text-5xl">
                 {t.contact.title1}
                 <span className="block text-orange-400">{t.contact.title2}</span>
               </h2>
@@ -800,11 +800,11 @@ export default async function Home({ searchParams }: HomeProps) {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="WhatsApp"
-          className="fixed bottom-7 right-7 z-[100] flex h-20 w-20 items-center justify-center rounded-full bg-[#25D366] text-white shadow-2xl transition hover:scale-105"
+          className="fixed bottom-5 right-5 z-[100] flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-2xl transition hover:scale-105 sm:bottom-7 sm:right-7 sm:h-20 sm:w-20"
         >
           <svg
             viewBox="0 0 32 32"
-            className="h-12 w-12 fill-current"
+            className="h-8 w-8 fill-current sm:h-12 sm:w-12"
             aria-hidden="true"
           >
             <path d="M16.04 3C9.42 3 4.05 8.37 4.05 14.99c0 2.31.66 4.56 1.9 6.49L4 28.617l7.311-1.911a11.93 11.93 0 0 0 4.73.96h.005c6.61 0 11.99-5.378 11.99-11.994C28.036 9.37 22.66 3 16.04 3Zm0 22.64h-.004a9.95 9.95 0 0 1-5.07-1.39l-.363-.216-4.338 1.135 1.158-4.227-.236-.37a9.96 9.96 0 0 1-1.53-5.303c0-5.512 4.485-9.996 9.998-9.996 2.669 0 5.178 1.04 7.065 2.928a9.93 9.93 0 0 1 2.927 7.067c-.002 5.512-4.488 9.998-9.997 9.998Zm5.482-7.49c-.3-.15-1.775-.876-2.05-.976-.275-.1-.475-.15-.675.15-.2.3-.775.976-.95 1.176-.175.2-.35.225-.65.075-.3-.15-1.267-.467-2.413-1.49-.892-.795-1.494-1.777-1.669-2.077-.175-.3-.019-.462.131-.611.135-.134.3-.35.45-.525.15-.175.2-.3.3-.5.1-.2.05-.375-.025-.525-.075-.15-.675-1.626-.925-2.227-.244-.586-.492-.507-.675-.516l-.575-.01c-.2 0-.525.075-.8.375-.275.3-1.05 1.026-1.05 2.502 0 1.476 1.075 2.902 1.225 3.102.15.2 2.115 3.228 5.122 4.527.715.309 1.273.493 1.708.631.718.228 1.371.196 1.887.119.575-.086 1.775-.726 2.025-1.427.25-.7.25-1.301.175-1.426-.075-.125-.275-.2-.575-.35Z" />
