@@ -1,87 +1,55 @@
 import { NextRequest, NextResponse } from "next/server";
 
-function unauthorized() {
-  return new NextResponse("Yetkisiz erişim.", {
-    status: 401,
-    headers: {
-      "WWW-Authenticate":
-        'Basic realm="Bahadir Sulek Admin", charset="UTF-8"',
-      "Cache-Control": "no-store",
-    },
-  });
-}
-
 export function proxy(request: NextRequest) {
-  const pathname = request.nextUrl.pathname;
+  const adminUser = process.env.ADMIN_USER;
+  const adminPassword = process.env.ADMIN_PASSWORD;
 
-  const isAdmin =
-    pathname === "/admin" ||
-    pathname.startsWith("/admin/");
-
-  const isWriteApi =
-    pathname.startsWith("/api/") &&
-    request.method !== "GET";
-
-  // Normal ziyaretçileri engelleme
-  if (!isAdmin && !isWriteApi) {
-    return NextResponse.next();
-  }
-
-  const expectedUser = process.env.ADMIN_USER;
-  const expectedPassword =
-    process.env.ADMIN_PASSWORD;
-
-  if (!expectedUser || !expectedPassword) {
+  if (!adminUser || !adminPassword) {
     return new NextResponse(
       "Admin giriş bilgileri tanımlanmamış.",
       { status: 500 }
     );
   }
 
-  const authorization =
-    request.headers.get("authorization");
+  const authorization = request.headers.get("authorization");
 
-  if (
-    !authorization ||
-    !authorization.startsWith("Basic ")
-  ) {
-    return unauthorized();
-  }
+  if (authorization) {
+    const [type, credentials] = authorization.split(" ");
 
-  try {
-    const decoded = atob(
-      authorization.substring(6)
-    );
+    if (type === "Basic" && credentials) {
+      try {
+        const decoded = atob(credentials);
+        const separatorIndex = decoded.indexOf(":");
 
-    const separatorIndex =
-      decoded.indexOf(":");
+        if (separatorIndex !== -1) {
+          const username = decoded.slice(0, separatorIndex);
+          const password = decoded.slice(separatorIndex + 1);
 
-    const username =
-      separatorIndex >= 0
-        ? decoded.substring(0, separatorIndex)
-        : decoded;
-
-    const password =
-      separatorIndex >= 0
-        ? decoded.substring(separatorIndex + 1)
-        : "";
-
-    if (
-      username === expectedUser &&
-      password === expectedPassword
-    ) {
-      return NextResponse.next();
+          if (
+            username === adminUser &&
+            password === adminPassword
+          ) {
+            return NextResponse.next();
+          }
+        }
+      } catch {
+        // Hatalı girişte aşağıdaki 401 cevabına devam eder.
+      }
     }
-  } catch {
-    return unauthorized();
   }
 
-  return unauthorized();
+  return new NextResponse(
+    "Yönetim paneline giriş yapmalısınız.",
+    {
+      status: 401,
+      headers: {
+        "WWW-Authenticate":
+          'Basic realm="Bahadir Sulek Admin"',
+      },
+    }
+  );
 }
 
 export const config = {
-  matcher: [
-    "/admin/:path*",
-    "/api/:path*",
-  ],
+  matcher: ["/admin/:path*"],
 };
