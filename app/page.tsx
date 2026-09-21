@@ -1,8 +1,9 @@
 import { prisma } from "@/prisma/lib/prisma";
-
-export const dynamic = "force-dynamic";
+import { connection } from "next/server";
 
 export default async function Home() {
+  await connection();
+
   const siteContent = await prisma.siteContent.findFirst();
 
   const galleryImages = await prisma.galleryImage.findMany({
