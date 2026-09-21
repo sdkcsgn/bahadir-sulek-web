@@ -1,0 +1,47 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model SiteContent {
+  id              Int      @id @default(autoincrement())
+  companyName     String   @default("BAHADIR SÜLEK")
+  subTitle        String   @default("SOĞUK HAVA & MEYVE PAKETLEME DEPOSU")
+  mainTitle       String   @default("Doğadan Sofranıza Güvenle.")
+  description     String   @default("Meyvelerinizi modern soğuk hava depolarımızda özenle muhafaza ediyor, işleme ve paketleme hattımızda sevkiyata hazır hale getiriyoruz.")
+  coldRooms       Int      @default(7)
+  storageCapacity Int      @default(200)
+  antalyaHal      Int      @default(59)
+  heroImage String @default("/images/meyveler.png")
+  phone      String @default("")
+whatsapp   String @default("")
+email      String @default("")
+address    String @default("Çandır Mahallesi, Çandır Bulvarı No:19 - Serik / Antalya")
+instagram  String @default("")
+  updatedAt       DateTime @updatedAt
+}
+
+model Product {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String   @default("")
+  category    String   @default("")
+  price       Float    @default(0)
+  unit        String   @default("kg")
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+model GalleryImage {
+  id        Int      @id @default(autoincrement())
+  title     String   @default("")
+  imagePath String
+  sortOrder Int      @default(0)
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
