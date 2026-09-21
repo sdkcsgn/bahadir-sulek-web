@@ -323,11 +323,11 @@ Teşekkürler.`
 
             <div className="relative min-h-[480px] overflow-hidden rounded-[65px_65px_65px_180px] border-[4px] border-[#ff8a00] bg-gradient-to-br from-[#ffa000] via-[#ff7600] to-[#ed4a00] shadow-2xl">
 
-              <<div className="absolute left-[15px] top-[95px] flex w-[60%] items-center justify-center">
+     <div className="absolute left-[45px] top-[115px] flex w-[48%] items-center justify-center">
   <img
     src={heroImage}
     alt="Bahadır Sülek meyve ve tesis görseli"
-    className="w-full max-w-[430px] object-contain drop-shadow-2xl"
+    className="max-h-[350px] w-auto max-w-full object-contain drop-shadow-2xl"
   />
 </div>
 
