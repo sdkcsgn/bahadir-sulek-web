@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { prisma } from "@/prisma/lib/prisma";
 import { connection } from "next/server";
 import { translations, type SiteLanguage } from "@/app/lib/site-translations";
@@ -13,24 +14,96 @@ function getLanguage(value?: string): SiteLanguage {
   return "tr";
 }
 
-function digitsOnly(value: string) {
-  return value.replace(/\D/g, "");
+const seoByLanguage: Record<
+  SiteLanguage,
+  {
+    title: string;
+    description: string;
+    locale: string;
+  }
+> = {
+  tr: {
+    title:
+      "Bahadır Sülek | Soğuk Hava Deposu & Meyve Paketleme - Serik Antalya",
+    description:
+      "Antalya Serik'te soğuk hava depolama, narenciye ve meyve işleme, paketleme ve ürün tedarik hizmetleri. Bahadır Sülek Soğuk Hava & Meyve Paketleme Deposu.",
+    locale: "tr_TR",
+  },
+  en: {
+    title:
+      "Bahadır Sülek | Cold Storage & Fruit Packaging - Antalya",
+    description:
+      "Cold storage, citrus and fruit processing, packaging and supply services in Serik, Antalya. Bahadır Sülek Cold Storage & Fruit Packaging.",
+    locale: "en_US",
+  },
+  ru: {
+    title:
+      "Bahadır Sülek | Холодильное хранение и упаковка фруктов - Анталья",
+    description:
+      "Холодильное хранение, обработка и упаковка цитрусовых и фруктов в Серике, Анталья. Bahadır Sülek — хранение, упаковка и поставка свежей продукции.",
+    locale: "ru_RU",
+  },
+};
+
+export async function generateMetadata({
+  searchParams,
+}: HomeProps): Promise<Metadata> {
+  const params = await searchParams;
+  const lang = getLanguage(params.lang);
+  const seo = seoByLanguage[lang];
+
+  const canonical =
+    lang === "tr"
+      ? "https://bahadirsulek.com.tr/"
+      : `https://bahadirsulek.com.tr/?lang=${lang}`;
+
+  return {
+    title: {
+      absolute: seo.title,
+    },
+    description: seo.description,
+    alternates: {
+      canonical,
+      languages: {
+        "tr-TR": "https://bahadirsulek.com.tr/",
+        en: "https://bahadirsulek.com.tr/?lang=en",
+        ru: "https://bahadirsulek.com.tr/?lang=ru",
+      },
+    },
+    openGraph: {
+      type: "website",
+      url: canonical,
+      siteName: "Bahadır Sülek",
+      title: seo.title,
+      description: seo.description,
+      locale: seo.locale,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: seo.title,
+      description: seo.description,
+    },
+  };
 }
 
-function phoneHref(value: string) {
+function digitsOnly(value?: string | null) {
+  return (value ?? "").replace(/\D/g, "");
+}
+
+function phoneHref(value?: string | null) {
   const number = digitsOnly(value);
   return number ? `tel:+${number}` : "#";
 }
 
-function instagramHref(value: string) {
-  const clean = value.trim();
+function instagramHref(value?: string | null) {
+  const clean = (value ?? "").trim();
   if (!clean) return "#";
   if (clean.startsWith("http://") || clean.startsWith("https://")) return clean;
   return `https://instagram.com/${clean.replace(/^@/, "")}`;
 }
 
-function productEmoji(name: string) {
-  const normalized = name.toLocaleLowerCase("tr-TR");
+function productEmoji(name?: string | null) {
+  const normalized = (name ?? "").toLocaleLowerCase("tr-TR");
   if (normalized.includes("portakal")) return "🍊";
   if (normalized.includes("mandalina")) return "🍊";
   if (normalized.includes("limon")) return "🍋";
