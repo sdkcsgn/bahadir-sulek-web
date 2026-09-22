@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { prisma } from "@/prisma/lib/prisma";
 import { connection } from "next/server";
 import { translations, type SiteLanguage } from "@/app/lib/site-translations";
+import GalleryLightbox from "@/app/components/GalleryLightbox";
 
 type HomeProps = {
   searchParams: Promise<{
@@ -637,31 +638,16 @@ export default async function Home({ searchParams }: HomeProps) {
           </div>
 
           {galleryImages.length > 0 ? (
-            <div className="mt-12 grid gap-6 md:grid-cols-3">
-              {galleryImages.map((image) => (
-                <div
-                  key={image.id}
-                  className="group overflow-hidden rounded-[28px] bg-white shadow-lg"
-                >
-                  <div className="overflow-hidden">
-                    <img
-                      src={image.imagePath}
-                      alt={image.title || t.gallery.defaultTitle}
-                      className="h-[260px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[330px]"
-                    />
-                  </div>
-
-                  <div className="p-6">
-                    <h3 className="text-xl font-black text-[#07572e]">
-                      {image.title
-                        ? image.title.replaceAll("_", " ")
-                        : t.gallery.defaultTitle}
-                    </h3>
-                    <p className="mt-2 text-gray-500">{t.gallery.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <GalleryLightbox
+              items={galleryImages.map((image) => ({
+                id: image.id,
+                imagePath: image.imagePath,
+                title: image.title
+                  ? image.title.replaceAll("_", " ")
+                  : t.gallery.defaultTitle,
+              }))}
+              description={t.gallery.description}
+            />
           ) : (
             <div className="mt-12 rounded-[28px] bg-white p-12 text-center shadow-sm">
               <p className="font-bold text-gray-500">{t.gallery.empty}</p>
